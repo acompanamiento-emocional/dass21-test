@@ -11,7 +11,6 @@
       background-color: #f7f9fb;
       color: #1f2933;
       margin: 0;
-      padding: 0;
     }
 
     .container {
@@ -23,6 +22,11 @@
     h1 {
       font-size: 1.8rem;
       margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
     }
 
     p {
@@ -48,14 +52,35 @@
     .card {
       background: #ffffff;
       border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
+      padding: 16px;
+      margin-bottom: 12px;
       border: 1px solid #e5e7eb;
       cursor: pointer;
+      transition: background 0.2s, border 0.2s;
     }
 
     .card:hover {
       background-color: #f1f5f9;
+      border-color: #7aa2c3;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .btn {
+      margin-top: 30px;
+      background-color: #7aa2c3;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #688fb0;
     }
   </style>
 </head>
@@ -63,24 +88,81 @@
 <body>
   <div class="container">
 
-    <h1>Evaluación emocional</h1>
-    <p>
-      A continuación encontrarás una serie de afirmaciones.
-      Elige la opción que mejor describa cómo te sentiste durante la última semana.
-      No hay respuestas correctas o incorrectas.
-    </p>
+    <!-- BIENVENIDA -->
+    <section id="welcome">
+      <h1>Bienvenido/a</h1>
+      <p>
+        Este espacio fue creado para ayudarte a explorar cómo te has sentido
+        emocionalmente durante la última semana.
+      </p>
+      <p>
+        La prueba toma solo unos minutos. No reemplaza una evaluación clínica,
+        pero puede orientarte sobre tu estado emocional actual.
+      </p>
 
-    <div class="progress">
-      <div class="progress-bar"></div>
-    </div>
+      <button class="btn" onclick="startTest()">Comenzar evaluación</button>
+    </section>
 
-    <h2>Me costó mucho relajarme</h2>
+    <!-- PRUEBA -->
+    <section id="test" class="hidden">
 
-    <div class="card">No me aplicó</div>
-    <div class="card">Me aplicó un poco, o durante parte del tiempo</div>
-    <div class="card">Me aplicó bastante, o durante una buena parte del tiempo</div>
-    <div class="card">Me aplicó mucho, o la mayor parte del tiempo</div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <h2 id="questionText"></h2>
+
+      <div class="card" onclick="answer(0)">No me ha ocurrido</div>
+      <div class="card" onclick="answer(1)">Me ha ocurrido un poco, o durante parte del tiempo</div>
+      <div class="card" onclick="answer(2)">Me ha ocurrido bastante, o durante una buena parte del tiempo</div>
+      <div class="card" onclick="answer(3)">Me ha ocurrido mucho, o la mayor parte del tiempo</div>
+
+    </section>
 
   </div>
+
+  <script>
+    const questions = [
+      "Me ha costado mucho descargar la tensión",
+      "Me di cuenta que tenía la boca seca",
+      "No podía sentir ningún sentimiento positivo"
+      // luego aquí van las 21
+    ];
+
+    let currentQuestion = 0;
+    let answers = [];
+
+    function startTest() {
+      document.getElementById("welcome").classList.add("hidden");
+      document.getElementById("test").classList.remove("hidden");
+      showQuestion();
+    }
+
+    function showQuestion() {
+      document.getElementById("questionText").innerText =
+        questions[currentQuestion];
+      updateProgress();
+    }
+
+    function answer(value) {
+      answers.push(value);
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        alert("Prueba finalizada (aquí irán los resultados)");
+      }
+    }
+
+    function updateProgress() {
+      const progress =
+        (currentQuestion / questions.length) * 100;
+      document.getElementById("progressBar").style.width =
+        progress + "%";
+    }
+  </script>
+
 </body>
 </html>
+
