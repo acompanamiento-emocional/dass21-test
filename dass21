@@ -1,0 +1,87 @@
+index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluación emocional – DASS-21</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #f7f9fb;
+      color: #1f2933;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #4a5568;
+    }
+
+    .progress {
+      height: 10px;
+      background-color: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 30px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #7aa2c3;
+      transition: width 0.3s ease;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background-color: #f1f5f9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Evaluación emocional</h1>
+    <p>
+      A continuación encontrarás una serie de afirmaciones.
+      Elige la opción que mejor describa cómo te sentiste durante la última semana.
+      No hay respuestas correctas o incorrectas.
+    </p>
+
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+
+    <h2>Me costó mucho relajarme</h2>
+
+    <div class="card">No me aplicó</div>
+    <div class="card">Me aplicó un poco, o durante parte del tiempo</div>
+    <div class="card">Me aplicó bastante, o durante una buena parte del tiempo</div>
+    <div class="card">Me aplicó mucho, o la mayor parte del tiempo</div>
+
+  </div>
+</body>
+</html>
