@@ -1,220 +1,242 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acompañamiento emocional – DASS-21</title>
+<meta charset="UTF-8">
+<title>DASS-21 – Acompañamiento emocional</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul-principal: #cfe0f8;
+  --azul-suave: #eef4ff;
+  --texto-principal: #1f2933;
+  --gris-suave: #9ca3af;
+}
 
-  <style>
-    :root {
-      --blue-soft: #e8f1ff;
-      --blue-accent: #cfe1ff;
-      --text-main: #222;
-      --text-soft: #888;
-      --bg: #ffffff;
-      --radius: 20px;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  background: #ffffff;
+  color: var(--texto-principal);
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
+/* ---------- HEADER ---------- */
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  color: #9ca3af;
+}
 
-    .app {
-      width: 100%;
-      max-width: 430px;
-      padding-bottom: 40px;
-    }
+header img {
+  width: 42px;
+  height: auto;
+}
 
-    /* Header */
-    header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 24px 20px 16px;
-      color: var(--text-soft);
-    }
+header span {
+  font-size: 0.95rem;
+}
 
-    header img {
-      width: 36px;
-      height: auto;
-    }
+/* ---------- DIVISOR ---------- */
+.divisor {
+  height: 14px;
+  background: var(--azul-principal);
+}
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-    }
+/* ---------- PANTALLAS ---------- */
+.screen {
+  display: none;
+  min-height: calc(100vh - 96px);
+  padding: 40px 20px;
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-    .divider {
-      width: 100%;
-      height: 32px;
-      background: var(--blue-soft);
-      margin-bottom: 48px;
-    }
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-    /* Welcome */
-    .welcome {
-      text-align: center;
-      padding: 0 28px;
-    }
+/* ---------- TEXTO ---------- */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
 
-    .welcome h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      margin-bottom: 32px;
-    }
+p {
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
 
-    .welcome p {
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--gris-suave);
+  margin-top: 24px;
+}
 
-    .disclaimer {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-top: 32px;
-    }
+/* ---------- BOTÓN ---------- */
+button {
+  margin: 40px auto 0;
+  padding: 14px 42px;
+  border: none;
+  border-radius: 999px;
+  background: var(--azul-principal);
+  font-size: 1rem;
+  cursor: pointer;
+}
 
-    .btn {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 16px 48px;
-      background: var(--blue-accent);
-      border-radius: 999px;
-      font-size: 1rem;
-      text-decoration: none;
-      color: #000;
-      transition: background 0.3s ease;
-    }
+/* ---------- PROGRESO ---------- */
+.progress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
 
-    .btn:hover {
-      background: #bcd6ff;
-    }
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #8fb3e8;
+  transition: width 0.3s ease;
+}
 
-    /* Question */
-    .question {
-      padding: 0 24px;
-    }
+/* ---------- PREGUNTA ---------- */
+.question {
+  font-size: 1.4rem;
+  margin-bottom: 32px;
+}
 
-    .question h3 {
-      font-size: 1.4rem;
-      text-align: center;
-      margin-bottom: 32px;
-      font-weight: 400;
-    }
+/* ---------- OPCIONES ---------- */
+.option {
+  background: var(--azul-suave);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+}
 
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      background: #f4f8ff;
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-      cursor: pointer;
-      transition: background 0.25s ease;
-    }
+.circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #6b7280;
+  flex-shrink: 0;
+}
 
-    .option:hover {
-      background: var(--blue-soft);
-    }
-
-    .circle {
-      width: 22px;
-      height: 22px;
-      border: 2px solid #555;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .option span {
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        background: #f6f8fb;
-      }
-
-      .app {
-        background: white;
-        margin: 40px 0;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      }
-    }
-  </style>
+.option.selected .circle {
+  background: #6b9cff;
+  border-color: #6b9cff;
+}
+</style>
 </head>
+
 <body>
-  <div class="app">
-    <header>
-      <img src="logo.png" alt="Logo acompañamiento emocional" />
-      <h1>Acompañamiento emocional</h1>
-    </header>
 
-    <div class="divider"></div>
+<!-- HEADER SIEMPRE VISIBLE -->
+<header>
+  <img src="png/logo.png" alt="Logo Acompañamiento emocional">
+  <span>Acompañamiento emocional</span>
+</header>
 
-    <!-- Welcome Screen -->
-    <section class="welcome">
-      <h2>Bienvenido/a</h2>
-      <p>
-        Este espacio fue creado para ayudarte a explorar cómo te has sentido
-        emocionalmente durante la última semana.
-      </p>
-      <p>
-        Responde con calma y honestidad. Solo te tomará unos minutos.
-        Recuerda que no hay respuestas correctas o incorrectas.
-      </p>
+<div class="divisor"></div>
 
-      <p class="disclaimer">
-        Esta evaluación no sustituye un diagnóstico clínico profesional.
-      </p>
+<!-- ---------- PANTALLA BIENVENIDA ---------- -->
+<section class="screen active" id="welcome">
+  <h1>Bienvenido/a</h1>
 
-      <a href="#pregunta" class="btn">Comenzar</a>
-    </section>
+  <p>
+    Este espacio fue creado para acompañarte a explorar cómo te has sentido
+    emocionalmente durante la última semana.
+  </p>
 
-    <!-- Question Example -->
-    <section class="question" id="pregunta" style="margin-top:80px;">
-      <h3>Me ha costado mucho descargar la tensión</h3>
+  <p>
+    Responde con calma y honestidad. No hay respuestas correctas o incorrectas.
+  </p>
 
-      <div class="option">
-        <div class="circle"></div>
-        <span>No me ha ocurrido</span>
-      </div>
+  <p class="disclaimer">
+    Esta evaluación es únicamente de orientación y no sustituye un diagnóstico
+    clínico profesional.
+  </p>
 
-      <div class="option">
-        <div class="circle"></div>
-        <span>Me ha ocurrido un poco, o durante parte del tiempo</span>
-      </div>
+  <button onclick="startTest()">Comenzar evaluación</button>
+</section>
 
-      <div class="option">
-        <div class="circle"></div>
-        <span>Me ha ocurrido bastante, o durante una buena parte del tiempo</span>
-      </div>
+<!-- ---------- PANTALLA PRUEBA ---------- -->
+<section class="screen" id="test">
 
-      <div class="option">
-        <div class="circle"></div>
-        <span>Me ha ocurrido mucho, o la mayor parte del tiempo</span>
-      </div>
-    </section>
+  <div class="progress">
+    <div class="progress-bar" id="progress"></div>
   </div>
+
+  <div class="question" id="questionText">
+    Me ha costado mucho descargar la tensión
+  </div>
+
+  <div class="option" onclick="selectOption(this)">
+    <div class="circle"></div>
+    No me ha ocurrido
+  </div>
+
+  <div class="option" onclick="selectOption(this)">
+    <div class="circle"></div>
+    Me ha ocurrido un poco, o durante parte del tiempo
+  </div>
+
+  <div class="option" onclick="selectOption(this)">
+    <div class="circle"></div>
+    Me ha ocurrido bastante, o durante una buena parte del tiempo
+  </div>
+
+  <div class="option" onclick="selectOption(this)">
+    <div class="circle"></div>
+    Me ha ocurrido mucho, o la mayor parte del tiempo
+  </div>
+
+  <button onclick="nextQuestion()">Aceptar</button>
+</section>
+
+<script>
+let currentQuestion = 0;
+const totalQuestions = 21;
+
+function startTest() {
+  document.getElementById("welcome").classList.remove("active");
+  document.getElementById("test").classList.add("active");
+  updateProgress();
+}
+
+function selectOption(element) {
+  document.querySelectorAll(".option").forEach(opt => {
+    opt.classList.remove("selected");
+  });
+  element.classList.add("selected");
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  updateProgress();
+  document.querySelectorAll(".option").forEach(opt => {
+    opt.classList.remove("selected");
+  });
+}
+
+function updateProgress() {
+  const percent = (currentQuestion / totalQuestions) * 100;
+  document.getElementById("progress").style.width = percent + "%";
+}
+</script>
+
 </body>
 </html>
