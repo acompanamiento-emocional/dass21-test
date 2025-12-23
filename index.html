@@ -217,39 +217,82 @@ button {
 </section>
 
 <script>
+const questions = [
+  "Me ha costado mucho descargar la tensión",
+  "Me di cuenta que tenía la boca seca",
+  "No podía sentir ningún sentimiento positivo",
+  "Se me hizo difícil respirar",
+  "Se me hizo difícil tomar la iniciativa para hacer cosas",
+  "Reaccioné exageradamente en ciertas situaciones",
+  "Sentí que mis manos temblaban",
+  "He sentido que estaba gastando una gran cantidad de energía",
+  "Estaba preocupado por situaciones en las cuales podía tener pánico o hacer el ridículo",
+  "He sentido que no había nada que me ilusionara",
+  "Me he sentido inquieto",
+  "Se me hizo difícil relajarme",
+  "Me sentí triste y deprimido",
+  "No toleré nada que no me permitiera continuar con lo que estaba haciendo",
+  "Sentí que estaba al borde del pánico",
+  "No me pude entusiasmar por nada",
+  "Sentí que valía muy poco como persona",
+  "He tendido a sentirme enfadado con facilidad",
+  "Sentí los latidos de mi corazón sin haber hecho esfuerzo físico",
+  "Tuve miedo sin razón",
+  "Sentí que la vida no tenía ningún sentido"
+];
+
+const optionsText = [
+  "No me ha ocurrido",
+  "Me ha ocurrido un poco, o durante parte del tiempo",
+  "Me ha ocurrido bastante, o durante una buena parte del tiempo",
+  "Me ha ocurrido mucho, o la mayor parte del tiempo"
+];
+
 let currentQuestion = 0;
-const totalQuestions = 21;
+const totalQuestions = questions.length;
+
+const questionText = document.getElementById("questionText");
+const options = document.querySelectorAll(".option");
+const progressBar = document.getElementById("progress");
 
 function startTest() {
   document.getElementById("welcome").classList.remove("active");
   document.getElementById("test").classList.add("active");
+  loadQuestion();
+}
+
+function loadQuestion() {
+  questionText.textContent = questions[currentQuestion];
+
+  options.forEach((option, index) => {
+    option.classList.remove("selected");
+    option.lastChild.textContent = optionsText[index];
+  });
+
   updateProgress();
 }
 
 function selectOption(element) {
-  document.querySelectorAll(".option").forEach(opt => {
-    opt.classList.remove("selected");
-  });
+  options.forEach(opt => opt.classList.remove("selected"));
   element.classList.add("selected");
 
   setTimeout(() => {
     nextQuestion();
-  }, 300); // transición suave
+  }, 300);
 }
 
 function nextQuestion() {
   currentQuestion++;
-  updateProgress();
-  document.querySelectorAll(".option").forEach(opt => {
-    opt.classList.remove("selected");
-  });
+
+  if (currentQuestion < totalQuestions) {
+    loadQuestion();
+  } else {
+    alert("Prueba terminada (siguiente paso: resultados)");
+  }
 }
 
 function updateProgress() {
   const percent = (currentQuestion / totalQuestions) * 100;
-  document.getElementById("progress").style.width = percent + "%";
+  progressBar.style.width = percent + "%";
 }
 </script>
-
-</body>
-</html>
