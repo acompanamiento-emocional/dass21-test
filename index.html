@@ -1,298 +1,220 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>DASS-21 – Acompañamiento emocional</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Resultados | Acompañamiento emocional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-  --azul-principal: #cfe0f8;
-  --azul-suave: #eef4ff;
-  --texto-principal: #1f2933;
-  --gris-suave: #9ca3af;
-  --azul-activo: #6b9cff;
-}
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
 
-* {
-  box-sizing: border-box;
-}
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
-  background: #ffffff;
-  color: var(--texto-principal);
-}
+    header img {
+      width: 90px;
+      margin-bottom: 10px;
+    }
 
-/* ---------- HEADER ---------- */
-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 28px 24px 20px;
-  color: #9ca3af;
-}
+    header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
 
-header img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  display: block;
-}
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
 
-header span {
-  font-size: 1.15rem;
-}
+    .speech {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      line-height: 1.6;
+    }
 
-/* ---------- DIVISOR ---------- */
-.divisor {
-  height: 22px;
-  background: var(--azul-principal);
-  margin-bottom: 20px;
-}
+    .indicator {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
 
-/* ---------- PANTALLAS ---------- */
-.screen {
-  display: none;
-  min-height: calc(100vh - 150px);
-  padding: 40px 20px;
-  max-width: 620px;
-  margin: 0 auto;
-  text-align: center;
-}
+    .indicator h3 {
+      margin-top: 0;
+    }
 
-.screen.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    .level {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-/* ---------- TEXTO ---------- */
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 28px;
-}
+    .availability {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #555;
+    }
 
-p {
-  line-height: 1.75;
-  margin-bottom: 18px;
-}
+    .cta {
+      text-align: center;
+      margin: 40px 0;
+    }
 
-.disclaimer {
-  font-size: 0.85rem;
-  color: var(--gris-suave);
-  margin-top: 28px;
-}
+    .cta button {
+      background: #222;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+    }
 
-/* ---------- BOTÓN ---------- */
-button {
-  margin: 48px auto 0;
-  padding: 16px 52px;
-  border: none;
-  border-radius: 999px;
-  background: var(--azul-principal);
-  font-size: 1.05rem;
-  cursor: pointer;
-}
-
-/* ---------- PROGRESO ---------- */
-.progress {
-  height: 14px; /* MÁS ANCHA */
-  background: #e5e7eb;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--azul-activo);
-  transition: width 0.35s ease;
-}
-
-/* ---------- PREGUNTA ---------- */
-.question {
-  font-size: 1.55rem;
-  margin-bottom: 40px;
-}
-
-/* ---------- OPCIONES ---------- */
-.option {
-  background: var(--azul-suave);
-  border-radius: 18px;
-  padding: 18px 20px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s ease;
-}
-
-.circle {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #6b7280;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.option.selected {
-  background: #dbe7ff;
-}
-
-.option.selected .circle {
-  background: var(--azul-activo);
-  border-color: var(--azul-activo);
-}
-</style>
+    .cta small {
+      display: block;
+      margin-top: 8px;
+      color: #777;
+      font-size: 0.8rem;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <img src="logo.png" alt="Logo Acompañamiento emocional">
-  <span>Acompañamiento emocional</span>
+  <h1>Acompañamiento emocional</h1>
 </header>
 
-<div class="divisor"></div>
+<div class="container">
 
-<!-- ---------- BIENVENIDA ---------- -->
-<section class="screen active" id="welcome">
-  <h1>Bienvenido/a</h1>
+  <!-- SPEECH GENERAL -->
+  <div class="speech" id="generalSpeech"></div>
 
-  <p>
-    Este espacio fue creado para acompañarte a explorar cómo te has sentido
-    emocionalmente durante la última semana.
-  </p>
+  <!-- INDICADORES -->
+  <div id="indicators"></div>
 
-  <p>
-    Responde con calma y honestidad. La evaluación toma solo unos minutos.
-  </p>
-
-  <p class="disclaimer">
-    Esta evaluación es únicamente de orientación y no sustituye un diagnóstico
-    clínico profesional.
-  </p>
-
-  <button onclick="startTest()">Comenzar evaluación</button>
-</section>
-
-<!-- ---------- PRUEBA ---------- -->
-<section class="screen" id="test">
-
-  <div class="progress">
-    <div class="progress-bar" id="progress"></div>
+  <!-- CTA -->
+  <div class="cta">
+    <button>Programar una reunión</button>
+    <small>Disponibilidad limitada según el momento</small>
   </div>
 
-  <div class="question" id="questionText">
-    Me ha costado mucho descargar la tensión
-  </div>
-
-  <div class="option" onclick="selectOption(this)">
-    <div class="circle"></div>
-    No me ha ocurrido
-  </div>
-
-  <div class="option" onclick="selectOption(this)">
-    <div class="circle"></div>
-    Me ha ocurrido un poco, o durante parte del tiempo
-  </div>
-
-  <div class="option" onclick="selectOption(this)">
-    <div class="circle"></div>
-    Me ha ocurrido bastante, o durante una buena parte del tiempo
-  </div>
-
-  <div class="option" onclick="selectOption(this)">
-    <div class="circle"></div>
-    Me ha ocurrido mucho, o la mayor parte del tiempo
-  </div>
-
-</section>
+</div>
 
 <script>
-const questions = [
-  "Me ha costado mucho descargar la tensión",
-  "Me di cuenta que tenía la boca seca",
-  "No podía sentir ningún sentimiento positivo",
-  "Se me hizo difícil respirar",
-  "Se me hizo difícil tomar la iniciativa para hacer cosas",
-  "Reaccioné exageradamente en ciertas situaciones",
-  "Sentí que mis manos temblaban",
-  "He sentido que estaba gastando una gran cantidad de energía",
-  "Estaba preocupado por situaciones en las cuales podía tener pánico o hacer el ridículo",
-  "He sentido que no había nada que me ilusionara",
-  "Me he sentido inquieto",
-  "Se me hizo difícil relajarme",
-  "Me sentí triste y deprimido",
-  "No toleré nada que no me permitiera continuar con lo que estaba haciendo",
-  "Sentí que estaba al borde del pánico",
-  "No me pude entusiasmar por nada",
-  "Sentí que valía muy poco como persona",
-  "He tendido a sentirme enfadado con facilidad",
-  "Sentí los latidos de mi corazón sin haber hecho esfuerzo físico",
-  "Tuve miedo sin razón",
-  "Sentí que la vida no tenía ningún sentido"
-];
+  /* ===============================
+     RESULTADOS (EJEMPLO)
+     Estos valores luego vendrán del DASS-21
+  =============================== */
 
-const optionsText = [
-  "No me ha ocurrido",
-  "Me ha ocurrido un poco, o durante parte del tiempo",
-  "Me ha ocurrido bastante, o durante una buena parte del tiempo",
-  "Me ha ocurrido mucho, o la mayor parte del tiempo"
-];
+  const results = {
+    ansiedad: "Alta",
+    depresion: "Baja",
+    estres: "Moderada"
+  };
 
-let currentQuestion = 0;
-const totalQuestions = questions.length;
+  /* ===============================
+     SPEECH GENERALES
+  =============================== */
 
-const questionText = document.getElementById("questionText");
-const options = document.querySelectorAll(".option");
-const progressBar = document.getElementById("progress");
+  const generalHighSpeech = `
+    <p><strong>Gracias por compartir cómo te has sentido.</strong></p>
+    <p>A partir de tus respuestas, se observan señales de malestar emocional que han estado presentes durante la última semana.</p>
+    <p>Esto no define quién eres, pero sí merece ser escuchado.</p>
+    <p>Hablar de lo que sentimos, incluso un poco, suele aliviar más de lo que imaginamos.</p>
+    <p>Si lo deseas, puedes conversar con uno de nuestros acompañantes emocionales, en un espacio confidencial y a tu ritmo.</p>
+  `;
 
-function startTest() {
-  document.getElementById("welcome").classList.remove("active");
-  document.getElementById("test").classList.add("active");
-  loadQuestion();
-}
+  const generalLowSpeech = `
+    <p>A partir de tus respuestas, tus niveles de ansiedad, depresión y estrés se encuentran en rangos bajos durante la última semana.</p>
+    <p>Aun así, sabemos que no todo malestar se refleja de la misma manera y que cada persona vive sus procesos de forma distinta.</p>
+    <p>Cuidar tu bienestar emocional también implica atender lo que sientes antes de que se vuelva más pesado.</p>
+    <p>Si te gustaría explorar cómo te sientes, reflexionar o simplemente contar con un espacio de escucha, nuestros acompañantes emocionales están disponibles para ti.</p>
+  `;
 
-function loadQuestion() {
-  questionText.textContent = questions[currentQuestion];
+  /* ===============================
+     SPEECH POR INDICADOR
+  =============================== */
 
-  options.forEach((option, index) => {
-    option.classList.remove("selected");
-    option.lastChild.textContent = optionsText[index];
-  });
+  const indicatorSpeeches = {
+    ansiedad: `
+      Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.
+      Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.
+      Un acompañante emocional puede caminar contigo en este proceso.
+    `,
+    depresion: `
+      A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.
+      No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.
+      Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo.
+    `,
+    estres: `
+      Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.
+      Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.
+      Conversar con alguien puede ayudarte a ordenar lo que pesa.
+    `
+  };
 
-  updateProgress();
-}
+  /* ===============================
+     UTILIDADES
+  =============================== */
 
-function selectOption(element) {
-  options.forEach(opt => opt.classList.remove("selected"));
-  element.classList.add("selected");
-
-  setTimeout(() => {
-    nextQuestion();
-  }, 300);
-}
-
-function nextQuestion() {
-  currentQuestion++;
-
-  if (currentQuestion < totalQuestions) {
-    loadQuestion();
-  } else {
-    alert("Prueba terminada (siguiente paso: resultados)");
+  function hasModerateOrHigh(results) {
+    return Object.values(results).some(level =>
+      level === "Moderada" || level === "Alta"
+    );
   }
-}
 
-function updateProgress() {
-  const percent = (currentQuestion / totalQuestions) * 100;
-  progressBar.style.width = percent + "%";
-}
+  function availabilityByLevel(level) {
+    if (level === "Alta") return Math.floor(Math.random() * 2) + 1; // 1–2
+    if (level === "Moderada") return Math.floor(Math.random() * 2) + 2; // 2–3
+    return Math.floor(Math.random() * 2) + 4; // 4–5
+  }
+
+  /* ===============================
+     RENDER GENERAL SPEECH
+  =============================== */
+
+  document.getElementById("generalSpeech").innerHTML =
+    hasModerateOrHigh(results) ? generalHighSpeech : generalLowSpeech;
+
+  /* ===============================
+     RENDER INDICADORES
+  =============================== */
+
+  const indicatorsContainer = document.getElementById("indicators");
+
+  for (const key in results) {
+    const level = results[key];
+    const availability = availabilityByLevel(level);
+
+    const div = document.createElement("div");
+    div.className = "indicator";
+
+    div.innerHTML = `
+      <h3>${key.charAt(0).toUpperCase() + key.slice(1)}</h3>
+      <div class="level">Nivel: ${level}</div>
+      <p>${indicatorSpeeches[key]}</p>
+      <div class="availability">
+        ${availability} especialista${availability > 1 ? "s" : ""} disponible${availability > 1 ? "s" : ""}
+      </div>
+    `;
+
+    indicatorsContainer.appendChild(div);
+  }
 </script>
+
+</body>
+</html>
