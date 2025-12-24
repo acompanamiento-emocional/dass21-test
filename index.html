@@ -84,7 +84,7 @@ p {
 
 /* ---------- BUTTON ---------- */
 button {
-  margin: 48px auto 0;
+  margin: 32px auto 0;
   padding: 16px 52px;
   border: none;
   border-radius: 999px;
@@ -162,12 +162,6 @@ button {
   font-size: 1.1rem;
 }
 
-.card button {
-  margin: 12px 0 0;
-  padding: 10px 24px;
-  font-size: 0.9rem;
-}
-
 /* ---------- MODAL ---------- */
 .modal-bg {
   position: fixed;
@@ -189,10 +183,6 @@ button {
 
 .modal h2 {
   margin-top: 0;
-}
-
-.modal button {
-  margin-top: 24px;
 }
 </style>
 </head>
@@ -218,10 +208,11 @@ button {
 <section class="screen" id="test">
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
   <div class="question" id="questionText"></div>
-  <div class="option" onclick="answer(0)"><div class="circle"></div><span></span></div>
-  <div class="option" onclick="answer(1)"><div class="circle"></div><span></span></div>
-  <div class="option" onclick="answer(2)"><div class="circle"></div><span></span></div>
-  <div class="option" onclick="answer(3)"><div class="circle"></div><span></span></div>
+
+  <div class="option" onclick="answer(0, this)"><div class="circle"></div><span></span></div>
+  <div class="option" onclick="answer(1, this)"><div class="circle"></div><span></span></div>
+  <div class="option" onclick="answer(2, this)"><div class="circle"></div><span></span></div>
+  <div class="option" onclick="answer(3, this)"><div class="circle"></div><span></span></div>
 </section>
 
 <!-- RESULTS -->
@@ -235,11 +226,13 @@ button {
       <p id="anxietyLevel"></p>
       <button onclick="openModal('ansiedad')">Leer más</button>
     </div>
+
     <div class="card">
       <strong>Depresión</strong>
       <p id="depressionLevel"></p>
       <button onclick="openModal('depresion')">Leer más</button>
     </div>
+
     <div class="card">
       <strong>Estrés</strong>
       <p id="stressLevel"></p>
@@ -298,9 +291,10 @@ const scales = {
 
 let current = 0;
 let answers = [];
+let specialistsCount = {};
 
 const qText = document.getElementById("questionText");
-const options = document.querySelectorAll(".option span");
+const optionSpans = document.querySelectorAll(".option span");
 const progress = document.getElementById("progress");
 
 function startTest() {
@@ -311,42 +305,50 @@ function startTest() {
 
 function loadQuestion() {
   qText.textContent = questions[current];
-  options.forEach((o,i)=>o.textContent=optionsText[i]);
+  optionSpans.forEach((o,i)=>o.textContent=optionsText[i]);
   progress.style.width = (current / questions.length * 100) + "%";
 }
 
-function answer(val) {
+function answer(val, el) {
   answers.push(val);
   document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
-  event.currentTarget.classList.add("selected");
+  el.classList.add("selected");
+
   setTimeout(()=>{
     current++;
-    if(current<questions.length) loadQuestion();
+    if(current < questions.length) loadQuestion();
     else showResults();
   },300);
 }
 
-function sumScale(arr){
+function sumScale(arr) {
   return arr.reduce((s,i)=>s+answers[i],0);
 }
 
-function level(score, type){
+function level(score, type) {
   const cut = {
     depresion: [[6,"leve"],[10,"moderado"],[13,"severo"]],
     ansiedad: [[4,"leve"],[7,"moderado"],[9,"severo"]],
     estres: [[9,"leve"],[12,"moderado"],[16,"severo"]]
   };
-  for(let [c,l] of cut[type]) if(score<=c) return l;
+  for (let [c,l] of cut[type]) if (score <= c) return l;
   return "extremadamente severo";
 }
 
-function showResults(){
+function generateSpecialists(level) {
+  if (["moderado","severo","extremadamente severo"].includes(level)) {
+    return Math.floor(Math.random() * 2) + 1; // 1–2
+  }
+  return Math.floor(Math.random() * 3) + 3; // 3–5
+}
+
+function showResults() {
   document.getElementById("test").classList.remove("active");
   document.getElementById("results").classList.add("active");
 
-  const d=sumScale(scales.depresion);
-  const a=sumScale(scales.ansiedad);
-  const e=sumScale(scales.estres);
+  const d = sumScale(scales.depresion);
+  const a = sumScale(scales.ansiedad);
+  const e = sumScale(scales.estres);
 
   const levels = {
     depresion: level(d,"depresion"),
@@ -354,32 +356,43 @@ function showResults(){
     estres: level(e,"estres")
   };
 
+  specialistsCount = {
+    depresion: generateSpecialists(levels.depresion),
+    ansiedad: generateSpecialists(levels.ansiedad),
+    estres: generateSpecialists(levels.estres)
+  };
+
   document.getElementById("depressionLevel").innerHTML = `<strong>Nivel ${levels.depresion}</strong>`;
   document.getElementById("anxietyLevel").innerHTML = `<strong>Nivel ${levels.ansiedad}</strong>`;
   document.getElementById("stressLevel").innerHTML = `<strong>Nivel ${levels.estres}</strong>`;
 
-  const high = Object.values(levels).some(l=>["moderado","severo","extremadamente severo"].includes(l));
+  const high = Object.values(levels).some(l =>
+    ["moderado","severo","extremadamente severo"].includes(l)
+  );
+
   document.getElementById("generalSpeech").textContent =
-    high ?
-    "A partir de tus respuestas se observan señales emocionales que merecen ser escuchadas con calma y sin juicios." :
-    "Tus niveles se encuentran en rangos bajos, aun así cuidar tu bienestar emocional sigue siendo importante.";
+    high
+    ? "A partir de tus respuestas se observan señales emocionales que merecen ser escuchadas con calma y sin juicios."
+    : "Tus niveles se encuentran en rangos bajos. Aun así, cuidar tu bienestar emocional sigue siendo importante.";
 }
 
-function openModal(type){
-  const texts={
-    depresion:"A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda...",
-    ansiedad:"Vivir con ansiedad puede sentirse como estar siempre en alerta...",
-    estres:"Cuando el estrés se acumula, el cuerpo y la mente piden una pausa..."
+function openModal(type) {
+  const texts = {
+    depresion: "A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda. Un acompañante emocional puede ayudarte a explorar lo que estás viviendo.",
+    ansiedad: "Vivir con ansiedad puede sentirse como estar siempre en alerta. Hablar de ello puede ayudarte a recuperar poco a poco la calma.",
+    estres: "Cuando el estrés se acumula, el cuerpo y la mente piden una pausa. Conversar con alguien puede marcar una diferencia."
   };
+
   document.getElementById("modalTitle").textContent = type.toUpperCase();
   document.getElementById("modalText").textContent = texts[type];
   document.getElementById("specialists").textContent =
-    `Especialistas disponibles: ${Math.floor(Math.random()*5)+1}`;
-  document.getElementById("modal").style.display="flex";
+    `Especialistas disponibles: ${specialistsCount[type]}`;
+
+  document.getElementById("modal").style.display = "flex";
 }
 
-function closeModal(){
-  document.getElementById("modal").style.display="none";
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
 </script>
 
