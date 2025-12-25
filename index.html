@@ -5,6 +5,9 @@
 <title>DASS-21 – Acompañamiento emocional</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 :root {
   --azul-principal: #cfe0f8;
@@ -162,6 +165,26 @@ button {
   font-size: 1.1rem;
 }
 
+/* ---------- ICONOS ---------- */
+.icon-depresion {
+  color: #2563eb;
+  margin-right: 8px;
+}
+
+.icon-ansiedad {
+  color: #facc15;
+  margin-right: 8px;
+}
+
+.icon-estres {
+  color: #dc2626;
+  margin-right: 8px;
+}
+
+.modal h2 i {
+  margin-right: 10px;
+}
+
 /* ---------- MODAL ---------- */
 .modal-bg {
   position: fixed;
@@ -222,19 +245,19 @@ button {
 
   <div class="cards">
     <div class="card">
-      <strong>Ansiedad</strong>
+      <strong><i class="fa-solid fa-bolt icon-ansiedad"></i>Ansiedad</strong>
       <p id="anxietyLevel"></p>
       <button onclick="openModal('ansiedad')">Leer más</button>
     </div>
 
     <div class="card">
-      <strong>Depresión</strong>
+      <strong><i class="fa-solid fa-cloud-rain icon-depresion"></i>Depresión</strong>
       <p id="depressionLevel"></p>
       <button onclick="openModal('depresion')">Leer más</button>
     </div>
 
     <div class="card">
-      <strong>Estrés</strong>
+      <strong><i class="fa-solid fa-gauge-high icon-estres"></i>Estrés</strong>
       <p id="stressLevel"></p>
       <button onclick="openModal('estres')">Leer más</button>
     </div>
@@ -388,6 +411,12 @@ function showResults() {
 }
 
 function openModal(type) {
+  const icons = {
+    depresion: '<i class="fa-solid fa-cloud-rain icon-depresion"></i>',
+    ansiedad: '<i class="fa-solid fa-bolt icon-ansiedad"></i>',
+    estres: '<i class="fa-solid fa-gauge-high icon-estres"></i>'
+  };
+
   const texts = {
     depresion: `
       <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
@@ -406,7 +435,9 @@ function openModal(type) {
     `
   };
 
-  document.getElementById("modalTitle").textContent = type.toUpperCase();
+  document.getElementById("modalTitle").innerHTML =
+    `${icons[type]} ${type.toUpperCase()}`;
+
   document.getElementById("modalText").innerHTML = texts[type];
   document.getElementById("specialists").textContent =
     `Especialistas disponibles: ${specialistsCount[type]}`;
@@ -421,5 +452,4 @@ function closeModal() {
 
 </body>
 </html>
-
 
