@@ -218,7 +218,7 @@ button {
 <!-- RESULTS -->
 <section class="screen" id="results">
   <h1>Gracias por compartir cómo te has sentido</h1>
-  <p id="generalSpeech"></p>
+  <div id="generalSpeech"></div>
 
   <div class="cards">
     <div class="card">
@@ -245,7 +245,7 @@ button {
 <div class="modal-bg" id="modal">
   <div class="modal">
     <h2 id="modalTitle"></h2>
-    <p id="modalText"></p>
+    <div id="modalText"></div>
     <p><strong id="specialists"></strong></p>
     <button onclick="closeModal()">Cerrar</button>
   </div>
@@ -370,21 +370,44 @@ function showResults() {
     ["moderado","severo","extremadamente severo"].includes(l)
   );
 
-  document.getElementById("generalSpeech").textContent =
+  document.getElementById("generalSpeech").innerHTML =
     high
-    ? "Gracias por compartir cómo te has sentido. A partir de tus respuestas, se observan señales de ansiedad que han estado presentes durante la última semana. Esto no define quién eres, pero sí merece ser escuchado. Hablar de lo que sentimos, incluso un poco, suele aliviar más de lo que imaginamos. Si lo deseas, puedes conversar con uno de nuestros acompañantes emocionales, en un espacio confidencial y a tu ritmo."
-    : "A partir de tus respuestas, tus niveles de ansiedad, depresión y estrés se encuentran en rangos bajos durante la última semana. Aun así, sabemos que no todo malestar se refleja de la misma manera y que cada persona vive sus procesos de forma distinta. Cuidar tu bienestar emocional también implica atender lo que sientes antes de que se vuelva más pesado. Si te gustaría explorar cómo te sientes, reflexionar o simplemente contar con un espacio de escucha, nuestros acompañantes emocionales están disponibles para ti";
+    ? `
+      <p>Gracias por compartir cómo te has sentido.</p>
+      <p>A partir de tus respuestas, se observan señales de ansiedad que han estado presentes durante la última semana.</p>
+      <p>Esto no define quién eres, pero sí merece ser escuchado.</p>
+      <p>Hablar de lo que sentimos, incluso un poco, suele aliviar más de lo que imaginamos.</p>
+      <p>Si lo deseas, puedes conversar con uno de nuestros acompañantes emocionales, en un espacio confidencial y a tu ritmo.</p>
+    `
+    : `
+      <p>A partir de tus respuestas, tus niveles de ansiedad, depresión y estrés se encuentran en rangos bajos durante la última semana.</p>
+      <p>Aun así, sabemos que no todo malestar se refleja de la misma manera y que cada persona vive sus procesos de forma distinta.</p>
+      <p>Cuidar tu bienestar emocional también implica atender lo que sientes antes de que se vuelva más pesado.</p>
+      <p>Si te gustaría explorar cómo te sientes, reflexionar o simplemente contar con un espacio de escucha, nuestros acompañantes emocionales están disponibles para ti.</p>
+    `;
 }
 
 function openModal(type) {
   const texts = {
-    depresion: "A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda. No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro. Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.",
-    ansiedad: "Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro. Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma. Un acompañante emocional puede caminar contigo en este proceso.",
-    estres: "Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa. Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día. Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo."
+    depresion: `
+      <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
+      <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
+      <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
+    `,
+    ansiedad: `
+      <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
+      <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
+      <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
+    `,
+    estres: `
+      <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
+      <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
+      <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
+    `
   };
 
   document.getElementById("modalTitle").textContent = type.toUpperCase();
-  document.getElementById("modalText").textContent = texts[type];
+  document.getElementById("modalText").innerHTML = texts[type];
   document.getElementById("specialists").textContent =
     `Especialistas disponibles: ${specialistsCount[type]}`;
 
