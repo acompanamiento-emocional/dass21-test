@@ -212,6 +212,7 @@ button {
 
 .modal-text {
   flex: 1;
+  min-width: 0;
 }
 
 .modal-image {
@@ -236,6 +237,10 @@ button {
 @media (max-width: 480px) {
   .modal-content {
     flex-direction: row;
+  }
+
+  .modal-image {
+    width: 100px;
   }
 }
 
