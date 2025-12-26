@@ -207,7 +207,7 @@ button {
 .modal-content {
   display: flex;
   gap: 20px;
- align-items: center;
+ align-items: flex-start;
 }
 
 .modal-text {
@@ -509,8 +509,6 @@ function openModal(type) {
     `${icons[type]} ${type.toUpperCase()}`;
 
   document.getElementById("modalText").innerHTML = texts[type];
-  document.getElementById("specialists").textContent =
-    `Especialistas disponibles: ${specialistsCount[type]}`;
 
   document.getElementById("modal").style.display = "flex";
 }
