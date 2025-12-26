@@ -295,46 +295,49 @@ button {
 </section>
 
 <!-- RESULTS -->
-<section class="screen" id="results">
-  <h1>Gracias por compartir cómo te has sentido</h1>
-  <div id="generalSpeech"></div>
+<div class="cards">
 
-  <div class="cards">
-    <div class="card card-result">
-  <div class="card-text">
-    <strong><i class="fa-solid fa-bolt icon-ansiedad"></i>Ansiedad</strong>
-    <p id="anxietyLevel"></p>
-    <button class="link" onclick="openModal('ansiedad')">Leer más...</button>
+  <!-- ANSIEDAD -->
+  <div class="card card-result">
+    <div class="card-text">
+      <strong><i class="fa-solid fa-bolt icon-ansiedad"></i> Ansiedad</strong>
+      <p id="anxietyLevel"></p>
+      <button class="link" onclick="openModal('ansiedad')">Leer más...</button>
+    </div>
+
+    <div class="card-image">
+      <img src="ansiedad.png" alt="Ansiedad">
+    </div>
   </div>
 
-  <div class="card-image">
-    <img src="ansiedad.png" alt="Ansiedad">
-  </div>
-</div>
-
-    <div class="card">
-      <strong><i class="fa-solid fa-cloud-rain icon-depresion"></i>Depresión</strong>
+  <!-- DEPRESIÓN -->
+  <div class="card card-result">
+    <div class="card-text">
+      <strong><i class="fa-solid fa-cloud-rain icon-depresion"></i> Depresión</strong>
       <p id="depressionLevel"></p>
-      <button onclick="openModal('depresion')">Leer más</button>
+      <button class="link" onclick="openModal('depresion')">Leer más...</button>
     </div>
 
-     <div class="card-image">
-   <img src="depresion.png" alt="Depresión">
+    <div class="card-image">
+      <img src="depresion.png" alt="Depresión">
+    </div>
   </div>
-</div>
 
-    <div class="card">
-      <strong><i class="fa-solid fa-gauge-high icon-estres"></i>Estrés</strong>
+  <!-- ESTRÉS -->
+  <div class="card card-result">
+    <div class="card-text">
+      <strong><i class="fa-solid fa-gauge-high icon-estres"></i> Estrés</strong>
       <p id="stressLevel"></p>
-      <button onclick="openModal('estres')">Leer más</button>
+      <button class="link" onclick="openModal('estres')">Leer más...</button>
     </div>
-  
-  <div class="card-image">
-    <img src="estres.png" alt="Estres">
+
+    <div class="card-image">
+      <img src="estres.png" alt="Estrés">
+    </div>
   </div>
+
 </div>
-  
-  </div>
+
 </section>
 
 <!-- MODAL -->
