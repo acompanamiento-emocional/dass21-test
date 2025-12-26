@@ -418,22 +418,25 @@ function openModal(type) {
   };
 
   const texts = {
-    depresion: `
-      <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
-      <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
-      <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
-    `,
-    ansiedad: `
-      <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
-      <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
-      <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
-    `,
-    estres: `
-      <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
-      <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
-      <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
-    `
-  };
+  depresion: `
+    <img src="depresion.png" alt="Depresión" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
+    <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
+    <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
+    <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
+  `,
+  ansiedad: `
+    <img src="ansiedad.png" alt="Ansiedad" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
+    <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
+    <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
+    <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
+  `,
+  estres: `
+    <img src="estres.png" alt="Estrés" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
+    <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
+    <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
+    <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
+  `
+};
 
   document.getElementById("modalTitle").innerHTML =
     `${icons[type]} ${type.toUpperCase()}`;
