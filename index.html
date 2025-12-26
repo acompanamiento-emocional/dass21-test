@@ -203,6 +203,41 @@ button {
   width: 90%;
   text-align: left;
 }
+  /* ---------- MODAL CONTENIDO ---------- */
+.modal-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.modal-text {
+  flex: 1;
+}
+
+.modal-image {
+  width: 120px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.modal-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.specialists {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+/* Móvil: se mantiene legible */
+@media (max-width: 480px) {
+  .modal-content {
+    flex-direction: row;
+  }
+}
 
 .modal h2 {
   margin-top: 0;
@@ -419,24 +454,52 @@ function openModal(type) {
 
   const texts = {
   depresion: `
-    <img src="depresion.png" alt="Depresión" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
-    <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
-    <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
-    <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
+    <div class="modal-content">
+      <div class="modal-text">
+        <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
+        <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
+        <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
+      </div>
+      <div class="modal-image">
+        <img src="depresion.png" alt="Depresión">
+        <div class="specialists">
+          Especialistas disponibles: ${specialistsCount.depresion}
+        </div>
+      </div>
+    </div>
   `,
   ansiedad: `
-    <img src="ansiedad.png" alt="Ansiedad" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
-    <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
-    <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
-    <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
+    <div class="modal-content">
+      <div class="modal-text">
+        <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
+        <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
+        <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
+      </div>
+      <div class="modal-image">
+        <img src="ansiedad.png" alt="Ansiedad">
+        <div class="specialists">
+          Especialistas disponibles: ${specialistsCount.ansiedad}
+        </div>
+      </div>
+    </div>
   `,
   estres: `
-    <img src="estres.png" alt="Estrés" style="width:100%; max-width:280px; display:block; margin:0 auto 20px;">
-    <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
-    <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
-    <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
+    <div class="modal-content">
+      <div class="modal-text">
+        <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
+        <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
+        <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
+      </div>
+      <div class="modal-image">
+        <img src="estres.png" alt="Estrés">
+        <div class="specialists">
+          Especialistas disponibles: ${specialistsCount.estres}
+        </div>
+      </div>
+    </div>
   `
 };
+
 
   document.getElementById("modalTitle").innerHTML =
     `${icons[type]} ${type.toUpperCase()}`;
