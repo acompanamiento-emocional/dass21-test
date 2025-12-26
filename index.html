@@ -353,11 +353,42 @@ button {
 <!-- MODAL -->
 <div class="modal-bg" id="modal">
   <div class="modal">
-    <h2 id="modalTitle"></h2>
-    <div id="modalText"></div>
-    <button onclick="closeModal()">Cerrar</button>
+
+    <!-- BOTÓN CERRAR -->
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <div class="modal-body">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="modal-left">
+        <h2 id="modalTitle"></h2>
+        <div id="modalText"></div>
+      </div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="modal-right">
+
+        <!-- GRÁFICA VERTICAL -->
+        <div class="bar-container">
+          <div class="bar-fill" id="modalBar"></div>
+        </div>
+
+        <!-- ESPECIALISTAS -->
+        <div class="specialists-strong" id="modalSpecialists">
+          Especialistas disponibles: 0
+        </div>
+
+        <!-- BOTÓN CONTACTO -->
+        <button class="contact-btn">
+          Contactar a un especialista
+        </button>
+
+      </div>
+
+    </div>
   </div>
 </div>
+
 
 <script>
 const questions = [
