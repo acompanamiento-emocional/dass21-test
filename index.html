@@ -164,6 +164,22 @@ button {
 .card strong {
   font-size: 1.1rem;
 }
+  .card-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.card-image img {
+  width: 110px;
+  border-radius: 14px;
+}
+
 
 /* ---------- ICONOS ---------- */
 .icon-depresion {
@@ -284,11 +300,17 @@ button {
   <div id="generalSpeech"></div>
 
   <div class="cards">
-    <div class="card">
-      <strong><i class="fa-solid fa-bolt icon-ansiedad"></i>Ansiedad</strong>
-      <p id="anxietyLevel"></p>
-      <button onclick="openModal('ansiedad')">Leer más</button>
-    </div>
+    <div class="card card-result">
+  <div class="card-text">
+    <strong><i class="fa-solid fa-bolt icon-ansiedad"></i>Ansiedad</strong>
+    <p id="anxietyLevel"></p>
+    <button class="link" onclick="openModal('ansiedad')">Leer más...</button>
+  </div>
+
+  <div class="card-image">
+    <img src="ansiedad.png" alt="Ansiedad">
+  </div>
+</div>
 
     <div class="card">
       <strong><i class="fa-solid fa-cloud-rain icon-depresion"></i>Depresión</strong>
@@ -296,11 +318,22 @@ button {
       <button onclick="openModal('depresion')">Leer más</button>
     </div>
 
+     <div class="card-image">
+   <img src="depresion.png" alt="Depresión">
+  </div>
+</div>
+
     <div class="card">
       <strong><i class="fa-solid fa-gauge-high icon-estres"></i>Estrés</strong>
       <p id="stressLevel"></p>
       <button onclick="openModal('estres')">Leer más</button>
     </div>
+  
+  <div class="card-image">
+    <img src="estres.png" alt="Estres">
+  </div>
+</div>
+  
   </div>
 </section>
 
