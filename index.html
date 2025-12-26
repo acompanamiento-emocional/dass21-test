@@ -295,50 +295,60 @@ button {
 </section>
 
 <!-- RESULTS -->
-<div class="cards">
+<section class="screen" id="results">
+  <h1>Gracias por compartir cómo te has sentido</h1>
+  <div id="generalSpeech"></div>
 
-  <!-- ANSIEDAD -->
-  <div class="card card-result">
-    <div class="card-text">
-      <strong><i class="fa-solid fa-bolt icon-ansiedad"></i> Ansiedad</strong>
-      <p id="anxietyLevel"></p>
-      <button class="link" onclick="openModal('ansiedad')">Leer más...</button>
+  <div class="cards">
+
+    <!-- ANSIEDAD -->
+    <div class="card card-result">
+      <div class="card-text">
+        <strong>
+          <i class="fa-solid fa-bolt icon-ansiedad"></i> Ansiedad
+        </strong>
+        <p id="anxietyLevel"></p>
+        <button class="link" onclick="openModal('ansiedad')">Leer más...</button>
+      </div>
+
+      <div class="card-image">
+        <img src="ansiedad.png" alt="Ansiedad">
+      </div>
     </div>
 
-    <div class="card-image">
-      <img src="ansiedad.png" alt="Ansiedad">
+    <!-- DEPRESIÓN -->
+    <div class="card card-result">
+      <div class="card-text">
+        <strong>
+          <i class="fa-solid fa-cloud-rain icon-depresion"></i> Depresión
+        </strong>
+        <p id="depressionLevel"></p>
+        <button class="link" onclick="openModal('depresion')">Leer más...</button>
+      </div>
+
+      <div class="card-image">
+        <img src="depresion.png" alt="Depresión">
+      </div>
     </div>
+
+    <!-- ESTRÉS -->
+    <div class="card card-result">
+      <div class="card-text">
+        <strong>
+          <i class="fa-solid fa-gauge-high icon-estres"></i> Estrés
+        </strong>
+        <p id="stressLevel"></p>
+        <button class="link" onclick="openModal('estres')">Leer más...</button>
+      </div>
+
+      <div class="card-image">
+        <img src="estres.png" alt="Estrés">
+      </div>
+    </div>
+
   </div>
-
-  <!-- DEPRESIÓN -->
-  <div class="card card-result">
-    <div class="card-text">
-      <strong><i class="fa-solid fa-cloud-rain icon-depresion"></i> Depresión</strong>
-      <p id="depressionLevel"></p>
-      <button class="link" onclick="openModal('depresion')">Leer más...</button>
-    </div>
-
-    <div class="card-image">
-      <img src="depresion.png" alt="Depresión">
-    </div>
-  </div>
-
-  <!-- ESTRÉS -->
-  <div class="card card-result">
-    <div class="card-text">
-      <strong><i class="fa-solid fa-gauge-high icon-estres"></i> Estrés</strong>
-      <p id="stressLevel"></p>
-      <button class="link" onclick="openModal('estres')">Leer más...</button>
-    </div>
-
-    <div class="card-image">
-      <img src="estres.png" alt="Estrés">
-    </div>
-  </div>
-
-</div>
-
 </section>
+
 
 <!-- MODAL -->
 <div class="modal-bg" id="modal">
