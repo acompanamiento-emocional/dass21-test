@@ -263,6 +263,82 @@ button {
 .modal h2 {
   margin-top: 0;
 }
+
+  /* ---------- MODAL BODY ---------- */
+.modal-body {
+  display: flex;
+  gap: 24px;
+}
+
+.modal-left {
+  flex: 1;
+}
+
+.modal-right {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---------- BARRA VERTICAL ---------- */
+.bar-container {
+  width: 26px;
+  height: 160px;
+  background: #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-fill {
+  width: 100%;
+  height: 0%;
+  border-radius: 14px;
+  transition: height 0.4s ease;
+}
+
+.bar-fill.ansiedad { background: #facc15; }
+.bar-fill.depresion { background: #2563eb; }
+.bar-fill.estres { background: #dc2626; }
+
+/* ---------- ESPECIALISTAS (FUERTE) ---------- */
+.specialists-strong {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ---------- BOTÓN CONTACTO ---------- */
+.contact-btn {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  background: var(--azul-principal);
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- BOTÓN CERRAR (X LIMPIA) ---------- */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-close:hover {
+  color: #111827;
+}
+
 </style>
 </head>
 
@@ -535,57 +611,46 @@ function openModal(type) {
 
   const texts = {
   depresion: `
-    <div class="modal-content">
-      <div class="modal-text">
-        <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
-        <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
-        <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo, para que esto no tenga que vivirse en soledad.</p>
-      </div>
-      <div class="modal-image">
-        <img src="depresion.png" alt="Depresión">
-        <div class="specialists">
-          Especialistas disponibles: ${specialistsCount.depresion}
-        </div>
-      </div>
-    </div>
+    <p>A veces, cuando el ánimo se vuelve más pesado, no es fácil pedir ayuda.</p>
+    <p>No porque no la necesitemos, sino porque cuesta poner en palabras lo que pasa por dentro.</p>
+    <p>Un acompañante emocional puede ayudarte a explorar lo que estás viviendo, sin juicios y a tu ritmo.</p>
   `,
   ansiedad: `
-    <div class="modal-content">
-      <div class="modal-text">
-        <p>Vivir con ansiedad puede sentirse como estar siempre en alerta, incluso cuando no hay un peligro claro.</p>
-        <p>Hablar de ello puede ayudarte a entender qué está pasando y a recuperar poco a poco la sensación de calma.</p>
-        <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
-      </div>
-      <div class="modal-image">
-        <img src="ansiedad.png" alt="Ansiedad">
-        <div class="specialists">
-          Especialistas disponibles: ${specialistsCount.ansiedad}
-        </div>
-      </div>
-    </div>
+    <p>Vivir con ansiedad puede sentirse como estar siempre en alerta.</p>
+    <p>Hablar de ello puede ayudarte a entender qué está pasando.</p>
+    <p>Un acompañante emocional puede caminar contigo en este proceso.</p>
   `,
   estres: `
-    <div class="modal-content">
-      <div class="modal-text">
-        <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
-        <p>Atenderlo a tiempo puede marcar una gran diferencia en cómo te sientes día a día.</p>
-        <p>Conversar con alguien puede ayudarte a ordenar lo que pesa y encontrar formas más amables de afrontarlo.</p>
-      </div>
-      <div class="modal-image">
-        <img src="estres.png" alt="Estrés">
-        <div class="specialists">
-          Especialistas disponibles: ${specialistsCount.estres}
-        </div>
-      </div>
-    </div>
+    <p>Cuando el estrés se acumula, el cuerpo y la mente empiezan a pedir una pausa.</p>
+    <p>Atenderlo a tiempo puede marcar una gran diferencia.</p>
+    <p>Conversar con alguien puede ayudarte a ordenar lo que pesa.</p>
   `
 };
-
 
   document.getElementById("modalTitle").innerHTML =
     `${icons[type]} ${type.toUpperCase()}`;
 
   document.getElementById("modalText").innerHTML = texts[type];
+
+  // ===== BARRA DEL INDICADOR =====
+const levelMap = {
+  leve: 25,
+  moderado: 50,
+  severo: 75,
+  "extremadamente severo": 100
+};
+
+const score = sumScale(scales[type]);
+const currentLevel = level(score, type);
+
+// Altura de la barra
+const bar = document.getElementById("modalBar");
+bar.style.height = levelMap[currentLevel] + "%";
+bar.className = "bar-fill " + type;
+
+// Especialistas (solo una vez, lado derecho)
+document.getElementById("modalSpecialists").textContent =
+  `Especialistas disponibles: ${specialistsCount[type]}`;
 
   document.getElementById("modal").style.display = "flex";
 }
