@@ -264,7 +264,11 @@ button {
 
 .modal h2 {
   margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
 
   /* ---------- MODAL BODY ---------- */
 .modal-body {
@@ -301,6 +305,16 @@ button {
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+}
+
+  /* ---------- ETIQUETA NIVEL (SUTIL) ---------- */
+.level-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  text-align: center;
 }
 
 .bar-fill {
@@ -509,10 +523,16 @@ button {
       <!-- COLUMNA DERECHA -->
       <div class="modal-right">
 
-        <!-- GRÁFICA VERTICAL -->
-        <div class="bar-container">
-          <div class="bar-fill" id="modalBar"></div>
-        </div>
+  <!-- NIVEL -->
+  <div class="level-label" id="modalLevel">
+    Nivel: —
+  </div>
+
+  <!-- GRÁFICA VERTICAL -->
+  <div class="bar-container">
+    <div class="bar-fill" id="modalBar"></div>
+  </div>
+
 
         <!-- ESPECIALISTAS -->
         <div class="specialists-strong" id="modalSpecialists">
