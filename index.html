@@ -284,6 +284,13 @@ button {
   gap: 14px;
   padding-top: 40px;
 }
+  /* ---------- NIVEL DE RESULTADO (RESULTADOS + MODAL) ---------- */
+#results p strong,
+.modal-left p strong {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+}
 
 /* ---------- BARRA VERTICAL ---------- */
 .bar-container {
@@ -341,6 +348,27 @@ button {
 .modal-close:hover {
   color: #111827;
 }
+  /* ---------- BOTÓN LEER MÁS ---------- */
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 8px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--azul-principal);
+
+  text-align: left;
+  display: inline-block;
+
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
   
   @media (max-width: 480px) {
   .modal-right {
