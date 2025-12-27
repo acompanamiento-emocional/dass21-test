@@ -726,6 +726,9 @@ const levelMap = {
 const score = sumScale(scales[type]);
 const currentLevel = level(score, type);
 
+const levelLabel = document.getElementById("modalLevel");
+levelLabel.textContent = `Nivel ${currentLevel}`;
+
 // Altura de la barra
 const bar = document.getElementById("modalBar");
 bar.style.height = levelMap[currentLevel] + "%";
