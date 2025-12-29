@@ -607,6 +607,10 @@ const optionSpans = document.querySelectorAll(".option span");
 const progress = document.getElementById("progress");
 
 function startTest() {
+  gtag('event', 'test_start', {
+  test_name: 'DASS-21'
+});
+
   document.getElementById("welcome").classList.remove("active");
   document.getElementById("test").classList.add("active");
   loadQuestion();
@@ -616,10 +620,22 @@ function loadQuestion() {
   qText.textContent = questions[current];
   optionSpans.forEach((o,i)=>o.textContent=optionsText[i]);
   progress.style.width = (current / questions.length * 100) + "%";
+
+  gtag('event', 'question_view', {
+    test_name: 'DASS-21',
+    question_number: current + 1,
+    total_questions: questions.length
+  });
 }
 
 function answer(val, el) {
   answers.push(val);
+
+  gtag('event', 'question_answered', {
+    test_name: 'DASS-21',
+    question_number: current + 1
+  });
+
   document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
   el.classList.add("selected");
 
@@ -652,6 +668,11 @@ function generateSpecialists(level) {
 }
 
 function showResults() {
+  gtag('event', 'test_completed', {
+  test_name: 'DASS-21',
+  total_questions: questions.length
+});
+
   document.getElementById("test").classList.remove("active");
   document.getElementById("results").classList.add("active");
 
@@ -695,6 +716,12 @@ function showResults() {
 }
 
 function openModal(type) {
+
+    gtag('event', 'modal_open', {
+    test_name: 'DASS-21',
+    modal_type: type
+  });
+
   const icons = {
     depresion: '<i class="fa-solid fa-cloud-rain icon-depresion"></i>',
     ansiedad: '<i class="fa-solid fa-bolt icon-ansiedad"></i>',
@@ -735,6 +762,13 @@ const levelMap = {
 const score = sumScale(scales[type]);
 const currentLevel = level(score, type);
 
+  // Evento GA4: nivel visualizado
+gtag('event', 'level_viewed', {
+  test_name: 'DASS-21',
+  scale: type,
+  level: currentLevel
+});
+
 const levelLabel = document.getElementById("modalLevel");
 levelLabel.textContent = `Nivel ${currentLevel}`;
 
@@ -753,6 +787,26 @@ document.getElementById("modalSpecialists").textContent =
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
+  
+  // CTA: Acompañante emocional (pantalla de resultados)
+document.querySelector(".cta-results").addEventListener("click", () => {
+  gtag('event', 'contact_click', {
+    test_name: 'DASS-21',
+    contact_type: 'emotional_companion',
+    screen: 'results'
+  });
+});
+
+  // CTA: Especialista (modal)
+document.querySelector(".contact-btn").addEventListener("click", () => {
+  gtag('event', 'contact_click', {
+    test_name: 'DASS-21',
+    contact_type: 'specialist',
+    screen: 'modal'
+  });
+});
+
+
 </script>
 
 </body>
